@@ -164,7 +164,7 @@ export default function GameScoreboard({ userId }: GameScoreboardProps) {
         <div className="scoreboard-progress-label">
           <span>Next rank in {Math.max(0, (leaderboard[(userEntry.rank ?? 2) - 2]?.score ?? 9999) - userEntry.score).toLocaleString()} pts</span>
         </div>
-        <div className="scoreboard-progress-track" aria-hidden="true">
+        <div className="scoreboard-progress-track" role="progressbar" aria-valuenow={Math.min(100, (userEntry.score / Math.max(1, leaderboard[0]?.score ?? 1)) * 100)} aria-valuemin={0} aria-valuemax={100} aria-label="Score progress towards next rank">
           <div
             className="scoreboard-progress-fill"
             style={{
