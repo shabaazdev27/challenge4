@@ -11,6 +11,7 @@ const config: Config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
+    "^uuid$": "<rootDir>/__mocks__/uuid.js",
   },
   testMatch: [
     "**/__tests__/**/*.[jt]s?(x)",

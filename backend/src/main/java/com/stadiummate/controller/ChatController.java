@@ -121,7 +121,7 @@ public class ChatController {
     @GetMapping("/chat/health")
     public ResponseEntity<String> health() {
         int nodeCount = graphService.getAllNodeIds().size();
-        return ResponseEntity.ok("StadiumMate OK — " + nodeCount + " nodes loaded");
+        return ResponseEntity.ok("StadiumMate OK - " + nodeCount + " nodes loaded");
     }
 
     // ─── Private helpers ──────────────────────────────────────────────────────

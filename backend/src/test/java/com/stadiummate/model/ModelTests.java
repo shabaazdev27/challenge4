@@ -13,14 +13,14 @@ public class ModelTests {
         StadiumNode node = new StadiumNode();
         node.setNodeId("123");
         node.setType("gate");
-        node.setLabel("Gate A");
+        node.setName("Gate A");
         node.setAccessible(true);
         node.setZone("ZONE_A");
         node.setEdges(List.of(new StadiumEdge()));
         
         assertEquals("123", node.getNodeId());
         assertEquals("gate", node.getType());
-        assertEquals("Gate A", node.getLabel());
+        assertEquals("Gate A", node.getName());
         assertTrue(node.isAccessible());
         assertEquals("ZONE_A", node.getZone());
         assertFalse(node.getEdges().isEmpty());
@@ -29,15 +29,15 @@ public class ModelTests {
     @Test
     public void testStadiumEdge() {
         StadiumEdge edge = StadiumEdge.builder()
-            .targetId("target")
-            .weight(1.0)
+            .to("target")
+            .baseWeight(1.0)
             .type("walkway")
             .isAccessible(true)
             .isCovered(true)
             .build();
             
-        assertEquals("target", edge.getTargetId());
-        assertEquals(1.0, edge.getWeight());
+        assertEquals("target", edge.getTo());
+        assertEquals(1.0, edge.getBaseWeight());
         assertEquals("walkway", edge.getType());
         assertTrue(edge.isAccessible());
         assertTrue(edge.isCovered());

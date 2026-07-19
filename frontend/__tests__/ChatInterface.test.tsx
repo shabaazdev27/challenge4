@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import ChatInterface from "../components/ChatInterface";
 
+beforeAll(() => {
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+});
+
 describe("ChatInterface", () => {
   it("renders correctly", () => {
     render(

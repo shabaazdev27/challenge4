@@ -6,6 +6,6 @@ describe("CrowdIndicator", () => {
     render(
       <CrowdIndicator crowdState={{ GATE_A: 0.5 }} showControls={false} />,
     );
-    expect(screen.getByText(/Crowd Level/i)).toBeInTheDocument();
+    expect(screen.getByText(/Live Crowd Density/i)).toBeInTheDocument();
   });
 });

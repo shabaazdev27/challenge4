@@ -51,7 +51,7 @@ public class ChatControllerTest {
         when(graphService.getAllNodeIds()).thenReturn(List.of("node1", "node2"));
         mockMvc.perform(get("/api/chat/health"))
                 .andExpect(status().isOk())
-                .andExpect(content().string("StadiumMate OK — 2 nodes loaded"));
+                .andExpect(content().string("StadiumMate OK - 2 nodes loaded"));
     }
 
     /**
