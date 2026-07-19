@@ -101,7 +101,11 @@ export default function CrowdIndicator({
       </div>
 
       {/* Zone bars */}
-      <div className="crowd-panel" role="list" aria-label="Zone congestion levels">
+      <div
+        className="crowd-panel"
+        role="list"
+        aria-label="Zone congestion levels"
+      >
         {zones.map((zoneId) => {
           const level = crowdState[zoneId] ?? 0;
           const color = crowdColor(level);
@@ -113,7 +117,11 @@ export default function CrowdIndicator({
               aria-label={`${ZONE_LABELS[zoneId]}: ${crowdLabel(level)} congestion at ${Math.round(level * 100)}%`}
             >
               <span
-                style={{ minWidth: 100, fontSize: "0.72rem", color: "var(--text-secondary)" }}
+                style={{
+                  minWidth: 100,
+                  fontSize: "0.72rem",
+                  color: "var(--text-secondary)",
+                }}
               >
                 {ZONE_LABELS[zoneId]}
               </span>
@@ -124,7 +132,12 @@ export default function CrowdIndicator({
                 />
               </div>
               <span
-                style={{ minWidth: 30, fontSize: "0.7rem", color, fontWeight: 600 }}
+                style={{
+                  minWidth: 30,
+                  fontSize: "0.7rem",
+                  color,
+                  fontWeight: 600,
+                }}
                 aria-hidden="true"
               >
                 {Math.round(level * 100)}%
@@ -161,7 +174,12 @@ export default function CrowdIndicator({
 
           <label
             htmlFor="sim-zone"
-            style={{ fontSize: "0.72rem", color: "var(--text-muted)", display: "block", marginBottom: 4 }}
+            style={{
+              fontSize: "0.72rem",
+              color: "var(--text-muted)",
+              display: "block",
+              marginBottom: 4,
+            }}
           >
             Zone
           </label>
@@ -182,23 +200,36 @@ export default function CrowdIndicator({
             aria-label="Select zone to simulate congestion"
           >
             {zones.map((z) => (
-              <option key={z} value={z}>{ZONE_LABELS[z]}</option>
+              <option key={z} value={z}>
+                {ZONE_LABELS[z]}
+              </option>
             ))}
           </select>
 
           <label
             htmlFor="sim-level"
-            style={{ fontSize: "0.72rem", color: "var(--text-muted)", display: "block", marginBottom: 4 }}
+            style={{
+              fontSize: "0.72rem",
+              color: "var(--text-muted)",
+              display: "block",
+              marginBottom: 4,
+            }}
           >
             Congestion: {Math.round(simLevel * 100)}%
           </label>
           <input
             id="sim-level"
             type="range"
-            min={0} max={1} step={0.05}
+            min={0}
+            max={1}
+            step={0.05}
             value={simLevel}
             onChange={(e) => setSimLevel(Number(e.target.value))}
-            style={{ width: "100%", marginBottom: 10, accentColor: "var(--color-accent)" }}
+            style={{
+              width: "100%",
+              marginBottom: 10,
+              accentColor: "var(--color-accent)",
+            }}
             aria-label={`Congestion level: ${Math.round(simLevel * 100)}%`}
           />
 
@@ -244,7 +275,11 @@ export default function CrowdIndicator({
 
           {simFeedback && (
             <p
-              style={{ marginTop: 8, fontSize: "0.72rem", color: "var(--text-muted)" }}
+              style={{
+                marginTop: 8,
+                fontSize: "0.72rem",
+                color: "var(--text-muted)",
+              }}
               role="status"
               aria-live="polite"
             >

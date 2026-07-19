@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * REST controller for Weather data.
+ */
 @RestController
 @RequestMapping("/api/weather")
 @CrossOrigin(origins = "*")

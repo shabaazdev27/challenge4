@@ -24,13 +24,8 @@ export default function HomePage() {
   const [showDemoControls, setShowDemoControls] = useState(false);
   const [viewMode, setViewMode] = useState<"map" | "live">("map");
 
-  const {
-    messages,
-    isLoading,
-    currentRoute,
-    crowdState,
-    sendMessage,
-  } = useChat();
+  const { messages, isLoading, currentRoute, crowdState, sendMessage } =
+    useChat();
 
   const {
     isListening,
@@ -67,7 +62,7 @@ export default function HomePage() {
         speak(response.narration, response.language ?? "en");
       }
     },
-    [sendMessage, currentLocation, speak, ttsSupported]
+    [sendMessage, currentLocation, speak, ttsSupported],
   );
 
   const handleSpeakMessage = useCallback(
@@ -78,7 +73,7 @@ export default function HomePage() {
         speak(text, language);
       }
     },
-    [isSpeaking, speak, stopSpeaking]
+    [isSpeaking, speak, stopSpeaking],
   );
 
   return (
@@ -86,7 +81,9 @@ export default function HomePage() {
       {/* ── Header ─────────────────────────────────────────────── */}
       <header className="app-header" role="banner">
         <div className="app-logo">
-          <div className="app-logo-icon" aria-hidden="true">🏟️</div>
+          <div className="app-logo-icon" aria-hidden="true">
+            🏟️
+          </div>
           <span>
             Stadium<span className="app-logo-accent">Mate</span>
           </span>
@@ -122,7 +119,9 @@ export default function HomePage() {
               cursor: "pointer",
               fontWeight: 600,
             }}
-            aria-label={showDemoControls ? "Hide demo controls" : "Show demo controls"}
+            aria-label={
+              showDemoControls ? "Hide demo controls" : "Show demo controls"
+            }
             aria-pressed={showDemoControls}
           >
             ⚡ Demo
@@ -141,15 +140,38 @@ export default function HomePage() {
       {/* ── Main split panel ───────────────────────────────────── */}
       <main className="main-panel" role="main">
         {/* Left: Stadium Map & Live View */}
-        <div style={{ display: "flex", flexDirection: "column", overflow: "hidden", position: "relative" }}>
-          <div style={{ position: "absolute", top: 16, right: 16, zIndex: 10, display: "flex", gap: 8 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 16,
+              right: 16,
+              zIndex: 10,
+              display: "flex",
+              gap: 8,
+            }}
+          >
             <button
               onClick={() => setViewMode("map")}
               style={{
-                background: viewMode === "map" ? "var(--color-accent)" : "rgba(10,14,26,0.8)",
+                background:
+                  viewMode === "map"
+                    ? "var(--color-accent)"
+                    : "rgba(10,14,26,0.8)",
                 color: viewMode === "map" ? "#000" : "#fff",
                 border: "1px solid var(--color-accent)",
-                padding: "6px 12px", borderRadius: 8, fontSize: "0.8rem", cursor: "pointer", fontWeight: "bold"
+                padding: "6px 12px",
+                borderRadius: 8,
+                fontSize: "0.8rem",
+                cursor: "pointer",
+                fontWeight: "bold",
               }}
             >
               2D Map
@@ -157,26 +179,40 @@ export default function HomePage() {
             <button
               onClick={() => setViewMode("live")}
               style={{
-                background: viewMode === "live" ? "var(--color-accent)" : "rgba(10,14,26,0.8)",
+                background:
+                  viewMode === "live"
+                    ? "var(--color-accent)"
+                    : "rgba(10,14,26,0.8)",
                 color: viewMode === "live" ? "#000" : "#fff",
                 border: "1px solid var(--color-accent)",
-                padding: "6px 12px", borderRadius: 8, fontSize: "0.8rem", cursor: "pointer", fontWeight: "bold"
+                padding: "6px 12px",
+                borderRadius: 8,
+                fontSize: "0.8rem",
+                cursor: "pointer",
+                fontWeight: "bold",
               }}
             >
               Live AR View
             </button>
           </div>
-          
+
           {viewMode === "map" ? (
             <StadiumMap route={currentRoute} crowdState={crowdState} />
           ) : (
-            <LiveViewMap apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""} />
+            <LiveViewMap
+              apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}
+            />
           )}
         </div>
 
         {/* Right: Chat + Crowd panel */}
         <div
-          style={{ display: "flex", flexDirection: "column", overflow: "hidden", height: "100%" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            height: "100%",
+          }}
         >
           {/* Fan Gamification Scoreboard */}
           <GameScoreboard userId="demo_fan_123" />

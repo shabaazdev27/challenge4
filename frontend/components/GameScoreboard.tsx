@@ -24,15 +24,29 @@ interface GameScoreboardProps {
 
 // ── Simulated leaderboard fallback (demo-safe) ────────────────────────────────
 const DEMO_LEADERBOARD: ScoreEntry[] = [
-  { userId: "fan_alpha",   displayName: "⚡ AlphaFan",   score: 4850, avatar: "🦁" },
-  { userId: "fan_beta",    displayName: "🔥 GoalKing",   score: 3920, avatar: "🐯" },
-  { userId: "fan_gamma",   displayName: "🏆 SuperSupp",  score: 3110, avatar: "🦊" },
-  { userId: "demo_fan_123", displayName: "🎯 You",        score: 1240, avatar: "⭐" },
-  { userId: "fan_delta",   displayName: "🎺 StadiumPro", score: 980,  avatar: "🐺" },
+  {
+    userId: "fan_alpha",
+    displayName: "⚡ AlphaFan",
+    score: 4850,
+    avatar: "🦁",
+  },
+  { userId: "fan_beta", displayName: "🔥 GoalKing", score: 3920, avatar: "🐯" },
+  {
+    userId: "fan_gamma",
+    displayName: "🏆 SuperSupp",
+    score: 3110,
+    avatar: "🦊",
+  },
+  { userId: "demo_fan_123", displayName: "🎯 You", score: 1240, avatar: "⭐" },
+  {
+    userId: "fan_delta",
+    displayName: "🎺 StadiumPro",
+    score: 980,
+    avatar: "🐺",
+  },
 ];
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 
 /** Fetch a user's score; throws on network/parse error */
 async function fetchUserScore(userId: string): Promise<number> {
@@ -48,7 +62,7 @@ async function fetchUserScore(userId: string): Promise<number> {
 /** Merge the live score into the leaderboard and re-rank */
 function buildLeaderboard(userId: string, liveScore: number): ScoreEntry[] {
   const board = DEMO_LEADERBOARD.map((e) =>
-    e.userId === userId ? { ...e, score: liveScore } : { ...e }
+    e.userId === userId ? { ...e, score: liveScore } : { ...e },
   );
   board.sort((a, b) => b.score - a.score);
   return board.map((e, i) => ({ ...e, rank: i + 1 }));
@@ -56,12 +70,13 @@ function buildLeaderboard(userId: string, liveScore: number): ScoreEntry[] {
 
 export default function GameScoreboard({ userId }: GameScoreboardProps) {
   const [leaderboard, setLeaderboard] = useState<ScoreEntry[]>(
-    buildLeaderboard(userId, 1240)
+    buildLeaderboard(userId, 1240),
   );
   const [isExpanded, setIsExpanded] = useState(false);
   const [pulse, setPulse] = useState(false);
 
-  const userEntry = leaderboard.find((e) => e.userId === userId) ?? leaderboard[0];
+  const userEntry =
+    leaderboard.find((e) => e.userId === userId) ?? leaderboard[0];
 
   const refresh = useCallback(async () => {
     try {
@@ -109,12 +124,18 @@ export default function GameScoreboard({ userId }: GameScoreboardProps) {
       </div>
 
       {/* ── User rank summary ──────────────────────────────────────── */}
-      <div className="scoreboard-my-rank" aria-label={`Your rank: ${userEntry.rank}`}>
-        <span className="scoreboard-rank-badge">{rankMedal(userEntry.rank ?? 99)}</span>
+      <div
+        className="scoreboard-my-rank"
+        aria-label={`Your rank: ${userEntry.rank}`}
+      >
+        <span className="scoreboard-rank-badge">
+          {rankMedal(userEntry.rank ?? 99)}
+        </span>
         <div className="scoreboard-rank-info">
           <span className="scoreboard-rank-name">{userEntry.displayName}</span>
           <span className="scoreboard-rank-label">
-            Rank {userEntry.rank} of {leaderboard.length} · Catch mascots to climb!
+            Rank {userEntry.rank} of {leaderboard.length} · Catch mascots to
+            climb!
           </span>
         </div>
         <button
@@ -149,7 +170,9 @@ export default function GameScoreboard({ userId }: GameScoreboardProps) {
                 <span className="scoreboard-entry-avatar" aria-hidden="true">
                   {entry.avatar}
                 </span>
-                <span className="scoreboard-entry-name">{entry.displayName}</span>
+                <span className="scoreboard-entry-name">
+                  {entry.displayName}
+                </span>
                 <span className="scoreboard-entry-score">
                   {entry.score.toLocaleString()}
                 </span>
@@ -160,11 +183,32 @@ export default function GameScoreboard({ userId }: GameScoreboardProps) {
       )}
 
       {/* ── Progress bar toward next rank ─────────────────────────── */}
-      <div className="scoreboard-progress-area" aria-label="Progress to next rank">
+      <div
+        className="scoreboard-progress-area"
+        aria-label="Progress to next rank"
+      >
         <div className="scoreboard-progress-label">
-          <span>Next rank in {Math.max(0, (leaderboard[(userEntry.rank ?? 2) - 2]?.score ?? 9999) - userEntry.score).toLocaleString()} pts</span>
+          <span>
+            Next rank in{" "}
+            {Math.max(
+              0,
+              (leaderboard[(userEntry.rank ?? 2) - 2]?.score ?? 9999) -
+                userEntry.score,
+            ).toLocaleString()}{" "}
+            pts
+          </span>
         </div>
-        <div className="scoreboard-progress-track" role="progressbar" aria-valuenow={Math.min(100, (userEntry.score / Math.max(1, leaderboard[0]?.score ?? 1)) * 100)} aria-valuemin={0} aria-valuemax={100} aria-label="Score progress towards next rank">
+        <div
+          className="scoreboard-progress-track"
+          role="progressbar"
+          aria-valuenow={Math.min(
+            100,
+            (userEntry.score / Math.max(1, leaderboard[0]?.score ?? 1)) * 100,
+          )}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Score progress towards next rank"
+        >
           <div
             className="scoreboard-progress-fill"
             style={{

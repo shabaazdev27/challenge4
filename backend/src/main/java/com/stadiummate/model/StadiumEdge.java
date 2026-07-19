@@ -44,7 +44,11 @@ public class StadiumEdge {
     @JsonProperty("type")
     private String type;
 
+    @Builder.Default
+    private boolean isAccessible = true;
+
     /** Whether this edge path is covered or exposed to weather. */
     @JsonProperty("isCovered")
+    @Builder.Default
     private boolean isCovered = true;
 }

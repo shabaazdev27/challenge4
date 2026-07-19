@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 
 declare global {
   interface Window {
@@ -13,13 +13,17 @@ interface LiveViewMapProps {
   lng?: number;
 }
 
-export default function LiveViewMap({ apiKey, lat = 40.8128, lng = -74.0742 }: LiveViewMapProps) {
+export default function LiveViewMap({
+  apiKey,
+  lat = 40.8128,
+  lng = -74.0742,
+}: LiveViewMapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // @ts-ignore - Google Maps is loaded dynamically
     if (!window.google) {
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
       script.async = true;
       script.defer = true;
@@ -43,5 +47,13 @@ export default function LiveViewMap({ apiKey, lat = 40.8128, lng = -74.0742 }: L
     }
   }, [apiKey, lat, lng]);
 
-  return <div ref={mapRef} role="region" aria-label="Interactive street view map" data-testid="stadium-map" style={{ width: '100%', height: '100%', minHeight: '400px' }} />;
+  return (
+    <div
+      ref={mapRef}
+      role="region"
+      aria-label="Interactive street view map"
+      data-testid="stadium-map"
+      style={{ width: "100%", height: "100%", minHeight: "400px" }}
+    />
+  );
 }

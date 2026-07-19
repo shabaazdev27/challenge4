@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST controller for Gamification and scoring.
+ */
 @RestController
 @RequestMapping("/api/game")
 @CrossOrigin(origins = "*")

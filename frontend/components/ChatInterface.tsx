@@ -22,32 +22,40 @@ import { RouteResult } from "@/lib/api";
 // ── Suggestion chips shown on the welcome screen ──────────────────────────────
 const SUGGESTIONS = [
   { text: "Where's the nearest accessible restroom?", icon: "♿" },
-  { text: "How do I get to Section 214?",             icon: "🗺️" },
-  { text: "¿Dónde está la comida?",                   icon: "🍕" },
-  { text: "Je cherche les ascenseurs",                 icon: "🛗" },
-  { text: "Where is the merchandise store?",           icon: "🛍️" },
-  { text: "Which gate is least crowded right now?",    icon: "📊" },
+  { text: "How do I get to Section 214?", icon: "🗺️" },
+  { text: "¿Dónde está la comida?", icon: "🍕" },
+  { text: "Je cherche les ascenseurs", icon: "🛗" },
+  { text: "Where is the merchandise store?", icon: "🛍️" },
+  { text: "Which gate is least crowded right now?", icon: "📊" },
 ];
 
 const STEP_ICONS: Record<string, string> = {
-  walk:     "👟",
+  walk: "👟",
   elevator: "🛗",
-  ramp:     "↗",
+  ramp: "↗",
 };
 
 const LANG_LABELS: Record<string, string> = {
-  en: "🇬🇧 English", es: "🇪🇸 Español", fr: "🇫🇷 Français",
-  pt: "🇧🇷 Português", de: "🇩🇪 Deutsch", ar: "🇸🇦 العربية",
-  zh: "🇨🇳 中文",     ja: "🇯🇵 日本語",   ko: "🇰🇷 한국어",
-  it: "🇮🇹 Italiano", nl: "🇳🇱 Nederlands", ru: "🇷🇺 Русский",
+  en: "🇬🇧 English",
+  es: "🇪🇸 Español",
+  fr: "🇫🇷 Français",
+  pt: "🇧🇷 Português",
+  de: "🇩🇪 Deutsch",
+  ar: "🇸🇦 العربية",
+  zh: "🇨🇳 中文",
+  ja: "🇯🇵 日本語",
+  ko: "🇰🇷 한국어",
+  it: "🇮🇹 Italiano",
+  nl: "🇳🇱 Nederlands",
+  ru: "🇷🇺 Русский",
 };
 
 // ── Location options ──────────────────────────────────────────────────────────
 const LOCATIONS = [
-  { id: "GATE_A",  label: "Gate A (East)" },
-  { id: "GATE_B",  label: "Gate B (North)" },
-  { id: "GATE_C",  label: "Gate C (West)" },
-  { id: "GATE_D",  label: "Gate D (South)" },
+  { id: "GATE_A", label: "Gate A (East)" },
+  { id: "GATE_B", label: "Gate B (North)" },
+  { id: "GATE_C", label: "Gate C (West)" },
+  { id: "GATE_D", label: "Gate D (South)" },
   { id: "SEC_114", label: "Section 114" },
   { id: "SEC_120", label: "Section 120" },
   { id: "SEC_214", label: "Section 214" },
@@ -82,8 +90,12 @@ function RouteSteps({ route }: { route: RouteResult }) {
       </div>
       {route.steps.map((step, i) => {
         const isFirst = i === 0;
-        const isLast  = i === route.steps.length - 1;
-        const icon    = isFirst ? "📍" : isLast ? "🏁" : (STEP_ICONS[step.edgeType] ?? "👟");
+        const isLast = i === route.steps.length - 1;
+        const icon = isFirst
+          ? "📍"
+          : isLast
+            ? "🏁"
+            : (STEP_ICONS[step.edgeType] ?? "👟");
 
         return (
           <React.Fragment key={step.nodeId}>
@@ -91,7 +103,9 @@ function RouteSteps({ route }: { route: RouteResult }) {
               className={`route-step ${isLast ? "route-step--destination" : ""}`}
               aria-label={`Step ${i + 1}: ${step.instruction}${step.distanceFromPrevious > 0 ? `, ${Math.round(step.distanceFromPrevious)} metres` : ""}`}
             >
-              <span className="step-icon" aria-hidden="true">{icon}</span>
+              <span className="step-icon" aria-hidden="true">
+                {icon}
+              </span>
               <span style={{ flex: 1 }}>{step.instruction}</span>
               {step.distanceFromPrevious > 0 && (
                 <span className="step-distance" aria-hidden="true">
@@ -123,9 +137,9 @@ export default function ChatInterface({
   ttsSupported,
   transcript,
 }: ChatInterfaceProps) {
-  const [inputText, setInputText]     = useState("");
-  const bottomRef                     = useRef<HTMLDivElement>(null);
-  const textareaRef                   = useRef<HTMLTextAreaElement>(null);
+  const [inputText, setInputText] = useState("");
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // ── Auto-scroll to latest message ────────────────────────────────────────
   useEffect(() => {
@@ -179,19 +193,31 @@ export default function ChatInterface({
         </div>
         <div className="chat-panel-header-meta" aria-live="polite">
           {isListening && (
-            <span className="chat-status chat-status--listening" role="status" aria-label="Microphone active, listening">
+            <span
+              className="chat-status chat-status--listening"
+              role="status"
+              aria-label="Microphone active, listening"
+            >
               <span className="chat-status-dot" aria-hidden="true" />
               Listening…
             </span>
           )}
           {isSpeaking && (
-            <span className="chat-status chat-status--speaking" role="status" aria-label="Speaking response">
+            <span
+              className="chat-status chat-status--speaking"
+              role="status"
+              aria-label="Speaking response"
+            >
               <span className="chat-status-dot" aria-hidden="true" />
               Speaking…
             </span>
           )}
           {isLoading && !isListening && !isSpeaking && (
-            <span className="chat-status chat-status--thinking" role="status" aria-label="AI is thinking">
+            <span
+              className="chat-status chat-status--thinking"
+              role="status"
+              aria-label="AI is thinking"
+            >
               <span className="chat-status-dot" aria-hidden="true" />
               Thinking…
             </span>
@@ -210,7 +236,9 @@ export default function ChatInterface({
         {messages.length === 0 ? (
           /* Welcome / empty state */
           <div className="chat-welcome" aria-label="Welcome screen">
-            <div className="chat-welcome-icon" aria-hidden="true">🏟️</div>
+            <div className="chat-welcome-icon" aria-hidden="true">
+              🏟️
+            </div>
             <h2>Welcome to StadiumMate</h2>
             <p>
               Ask me anything in your language — I&apos;ll guide you with
@@ -312,9 +340,18 @@ export default function ChatInterface({
                 {msg.role === "assistant" && ttsSupported && (
                   <button
                     className={`chat-btn chat-btn--speak ${isSpeaking ? "speaking" : ""}`}
-                    style={{ marginTop: 8, width: 34, height: 34, fontSize: "0.85rem" }}
-                    onClick={() => onSpeakMessage(msg.content, msg.language ?? "en")}
-                    aria-label={isSpeaking ? "Stop speaking" : "Read this message aloud"}
+                    style={{
+                      marginTop: 8,
+                      width: 34,
+                      height: 34,
+                      fontSize: "0.85rem",
+                    }}
+                    onClick={() =>
+                      onSpeakMessage(msg.content, msg.language ?? "en")
+                    }
+                    aria-label={
+                      isSpeaking ? "Stop speaking" : "Read this message aloud"
+                    }
                     title={isSpeaking ? "Stop" : "Listen"}
                   >
                     {isSpeaking ? "⏹" : "🔊"}
@@ -332,7 +369,10 @@ export default function ChatInterface({
             aria-live="polite"
             aria-label="StadiumMate is thinking"
           >
-            <div className="message-avatar message-avatar--assistant" aria-hidden="true">
+            <div
+              className="message-avatar message-avatar--assistant"
+              aria-hidden="true"
+            >
               🤖
             </div>
             <div className="message-bubble message-bubble--assistant">
@@ -371,13 +411,19 @@ export default function ChatInterface({
         </div>
 
         {/* Input row */}
-        <div className="chat-input-row" role="search" aria-label="Message input area">
+        <div
+          className="chat-input-row"
+          role="search"
+          aria-label="Message input area"
+        >
           {/* Voice input */}
           {voiceSupported && (
             <button
               className={`chat-btn chat-btn--mic ${isListening ? "listening" : ""}`}
               onClick={handleMicClick}
-              aria-label={isListening ? "Stop voice input" : "Start voice input"}
+              aria-label={
+                isListening ? "Stop voice input" : "Start voice input"
+              }
               title={isListening ? "Stop listening" : "Speak your question"}
             >
               {isListening ? "⏹" : "🎤"}
