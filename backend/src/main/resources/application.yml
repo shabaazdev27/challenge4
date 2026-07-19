@@ -40,7 +40,7 @@ stadiummate:
   # Graph data source: firestore | local
   # Use "local" during development to skip Firestore and load from classpath JSON.
   graph:
-    source: ${GRAPH_SOURCE:local}
+    source: ${GRAPH_SOURCE:firestore}
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
 logging:
