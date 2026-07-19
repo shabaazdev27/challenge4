@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Stadium graph ──────────────────────────────────────────────────────
+    // Public read — fans/frontend can read the graph via the backend service.
+    // Write is restricted to authenticated service accounts (backend Cloud Run).
+    match /stadium_graph/{nodeId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ── Crowd state ────────────────────────────────────────────────────────
+    // Public read (crowd levels shown on frontend heat map).
+    // Write only from authenticated service account (backend + simulator).
+    match /crowd_state/{zoneId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ── Sessions ───────────────────────────────────────────────────────────
+    // Each fan session document is readable/writable only by the session owner
+    // (identified by the sessionId in the path matching the auth uid,
+    //  or by the backend service account).
+    // For the hackathon demo, sessions are currently write-by-anyone since
+    // fans use anonymous session IDs. Tighten in production.
+    match /sessions/{sessionId} {
+      allow read, write: if true;  // TODO: tighten for production
+    }
+
+    // ── Default deny ──────────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,1043 @@
+[
+  {
+    "nodeId": "GATE_A",
+    "type": "gate",
+    "name": "Gate A — East Entrance",
+    "floor": 1,
+    "svgX": 640,
+    "svgY": 295,
+    "zone": "ZONE_GATE_A",
+    "accessible": true,
+    "keywords": [
+      "gate a",
+      "east",
+      "east entrance",
+      "east gate"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_MAIN_SE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "REST_E",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "FOOD_E",
+        "baseWeight": 35,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "ELEV_E",
+        "baseWeight": 40,
+        "type": "elevator",
+        "isCovered": false
+      },
+      {
+        "to": "FIRSTAID",
+        "baseWeight": 80,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "SEC_120",
+        "baseWeight": 45,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "coin"
+    ]
+  },
+  {
+    "nodeId": "CONC_MAIN_NE",
+    "type": "concourse",
+    "name": "Northeast Concourse",
+    "floor": 1,
+    "svgX": 570,
+    "svgY": 160,
+    "zone": "ZONE_CONC_NE",
+    "accessible": true,
+    "keywords": [
+      "northeast concourse",
+      "northeast corridor",
+      "ne concourse"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "GATE_B",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "MERCH_MAIN",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "RAMP_NE",
+        "baseWeight": 40,
+        "type": "ramp",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "GATE_B",
+    "type": "gate",
+    "name": "Gate B — North Entrance",
+    "floor": 1,
+    "svgX": 400,
+    "svgY": 105,
+    "zone": "ZONE_GATE_B",
+    "accessible": true,
+    "keywords": [
+      "gate b",
+      "north",
+      "north entrance",
+      "north gate"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NE",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_MAIN_NW",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "REST_N_ACC",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "FOOD_N",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "coin"
+    ]
+  },
+  {
+    "nodeId": "CONC_MAIN_NW",
+    "type": "concourse",
+    "name": "Northwest Concourse",
+    "floor": 1,
+    "svgX": 230,
+    "svgY": 160,
+    "zone": "ZONE_CONC_NW",
+    "accessible": true,
+    "keywords": [
+      "northwest concourse",
+      "northwest corridor",
+      "nw concourse"
+    ],
+    "edges": [
+      {
+        "to": "GATE_B",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "GATE_C",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "ELEV_W",
+        "baseWeight": 35,
+        "type": "elevator",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "GATE_C",
+    "type": "gate",
+    "name": "Gate C — West Entrance",
+    "floor": 1,
+    "svgX": 160,
+    "svgY": 295,
+    "zone": "ZONE_GATE_C",
+    "accessible": true,
+    "keywords": [
+      "gate c",
+      "west",
+      "west entrance",
+      "west gate"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_MAIN_SW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "REST_W",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "FOOD_W",
+        "baseWeight": 35,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "coin"
+    ]
+  },
+  {
+    "nodeId": "CONC_MAIN_SW",
+    "type": "concourse",
+    "name": "Southwest Concourse",
+    "floor": 1,
+    "svgX": 230,
+    "svgY": 430,
+    "zone": "ZONE_CONC_SW",
+    "accessible": true,
+    "keywords": [
+      "southwest concourse",
+      "southwest corridor",
+      "sw concourse"
+    ],
+    "edges": [
+      {
+        "to": "GATE_C",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "GATE_D",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "RAMP_SW",
+        "baseWeight": 40,
+        "type": "ramp",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "GATE_D",
+    "type": "gate",
+    "name": "Gate D — South Entrance",
+    "floor": 1,
+    "svgX": 400,
+    "svgY": 485,
+    "zone": "ZONE_GATE_D",
+    "accessible": true,
+    "keywords": [
+      "gate d",
+      "south",
+      "south entrance",
+      "south gate"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_SW",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_MAIN_SE",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "REST_S_ACC",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "FOOD_S",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "SEC_114",
+        "baseWeight": 45,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "coin"
+    ]
+  },
+  {
+    "nodeId": "CONC_MAIN_SE",
+    "type": "concourse",
+    "name": "Southeast Concourse",
+    "floor": 1,
+    "svgX": 570,
+    "svgY": 430,
+    "zone": "ZONE_CONC_SE",
+    "accessible": true,
+    "keywords": [
+      "southeast concourse",
+      "southeast corridor",
+      "se concourse"
+    ],
+    "edges": [
+      {
+        "to": "GATE_D",
+        "baseWeight": 110,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "GATE_A",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": false
+      },
+      {
+        "to": "TEAM_ENTRY",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "REST_N_ACC",
+    "type": "restroom",
+    "name": "Restroom — North (Accessible ♿)",
+    "floor": 1,
+    "svgX": 400,
+    "svgY": 130,
+    "zone": "ZONE_GATE_B",
+    "accessible": true,
+    "keywords": [
+      "restroom",
+      "accessible restroom",
+      "wheelchair restroom",
+      "north restroom",
+      "bathroom",
+      "toilet",
+      "wc",
+      "lavatory",
+      "accesible",
+      "handicap restroom"
+    ],
+    "edges": [
+      {
+        "to": "GATE_B",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "REST_S_ACC",
+    "type": "restroom",
+    "name": "Restroom — South (Accessible ♿)",
+    "floor": 1,
+    "svgX": 400,
+    "svgY": 460,
+    "zone": "ZONE_GATE_D",
+    "accessible": true,
+    "keywords": [
+      "restroom",
+      "accessible restroom",
+      "wheelchair restroom",
+      "south restroom",
+      "bathroom",
+      "toilet",
+      "wc",
+      "lavatory"
+    ],
+    "edges": [
+      {
+        "to": "GATE_D",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "REST_E",
+    "type": "restroom",
+    "name": "Restroom — East",
+    "floor": 1,
+    "svgX": 625,
+    "svgY": 220,
+    "zone": "ZONE_GATE_A",
+    "accessible": false,
+    "keywords": [
+      "restroom",
+      "east restroom",
+      "bathroom",
+      "toilet",
+      "wc"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "REST_W",
+    "type": "restroom",
+    "name": "Restroom — West",
+    "floor": 1,
+    "svgX": 185,
+    "svgY": 370,
+    "zone": "ZONE_GATE_C",
+    "accessible": false,
+    "keywords": [
+      "restroom",
+      "west restroom",
+      "bathroom",
+      "toilet",
+      "wc"
+    ],
+    "edges": [
+      {
+        "to": "GATE_C",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "FOOD_N",
+    "type": "food",
+    "name": "Food Court — North",
+    "floor": 1,
+    "svgX": 330,
+    "svgY": 120,
+    "zone": "ZONE_GATE_B",
+    "accessible": true,
+    "keywords": [
+      "food",
+      "food court",
+      "concession",
+      "eat",
+      "snack",
+      "north food",
+      "drinks",
+      "burger",
+      "hot dog",
+      "beer"
+    ],
+    "edges": [
+      {
+        "to": "GATE_B",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "mascot"
+    ]
+  },
+  {
+    "nodeId": "FOOD_S",
+    "type": "food",
+    "name": "Food Court — South",
+    "floor": 1,
+    "svgX": 470,
+    "svgY": 465,
+    "zone": "ZONE_GATE_D",
+    "accessible": true,
+    "keywords": [
+      "food",
+      "food court",
+      "concession",
+      "eat",
+      "snack",
+      "south food",
+      "drinks"
+    ],
+    "edges": [
+      {
+        "to": "GATE_D",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "mascot"
+    ]
+  },
+  {
+    "nodeId": "FOOD_E",
+    "type": "food",
+    "name": "Food Court — East",
+    "floor": 1,
+    "svgX": 615,
+    "svgY": 375,
+    "zone": "ZONE_GATE_A",
+    "accessible": true,
+    "keywords": [
+      "food",
+      "food court",
+      "concession",
+      "eat",
+      "snack",
+      "east food",
+      "drinks"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 35,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "mascot"
+    ]
+  },
+  {
+    "nodeId": "FOOD_W",
+    "type": "food",
+    "name": "Food Court — West",
+    "floor": 1,
+    "svgX": 185,
+    "svgY": 220,
+    "zone": "ZONE_GATE_C",
+    "accessible": true,
+    "keywords": [
+      "food",
+      "food court",
+      "concession",
+      "eat",
+      "snack",
+      "west food",
+      "drinks"
+    ],
+    "edges": [
+      {
+        "to": "GATE_C",
+        "baseWeight": 35,
+        "type": "walk",
+        "isCovered": false
+      }
+    ],
+    "spawnPoints": [
+      "mascot"
+    ]
+  },
+  {
+    "nodeId": "ELEV_E",
+    "type": "elevator",
+    "name": "Elevator — East",
+    "floor": 1,
+    "svgX": 592,
+    "svgY": 295,
+    "zone": "ZONE_GATE_A",
+    "accessible": true,
+    "keywords": [
+      "elevator",
+      "lift",
+      "east elevator",
+      "accessible",
+      "wheelchair"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 40,
+        "type": "elevator",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_UPPER_SE",
+        "baseWeight": 30,
+        "type": "elevator",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "ELEV_W",
+    "type": "elevator",
+    "name": "Elevator — West",
+    "floor": 1,
+    "svgX": 210,
+    "svgY": 295,
+    "zone": "ZONE_CONC_NW",
+    "accessible": true,
+    "keywords": [
+      "elevator",
+      "lift",
+      "west elevator",
+      "accessible",
+      "wheelchair"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NW",
+        "baseWeight": 35,
+        "type": "elevator",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_NW",
+        "baseWeight": 30,
+        "type": "elevator",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "RAMP_NE",
+    "type": "ramp",
+    "name": "Ramp — Northeast (Upper Level Access)",
+    "floor": 1,
+    "svgX": 530,
+    "svgY": 185,
+    "zone": "ZONE_CONC_NE",
+    "accessible": false,
+    "keywords": [
+      "ramp",
+      "northeast ramp",
+      "upper level",
+      "stairs",
+      "upper deck"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NE",
+        "baseWeight": 40,
+        "type": "ramp",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_UPPER_NE",
+        "baseWeight": 35,
+        "type": "ramp",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "RAMP_SW",
+    "type": "ramp",
+    "name": "Ramp — Southwest (Upper Level Access)",
+    "floor": 1,
+    "svgX": 265,
+    "svgY": 405,
+    "zone": "ZONE_CONC_SW",
+    "accessible": false,
+    "keywords": [
+      "ramp",
+      "southwest ramp",
+      "upper level",
+      "stairs",
+      "upper deck"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_SW",
+        "baseWeight": 40,
+        "type": "ramp",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_UPPER_SW",
+        "baseWeight": 35,
+        "type": "ramp",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "FIRSTAID",
+    "type": "firstaid",
+    "name": "First Aid Station",
+    "floor": 1,
+    "svgX": 480,
+    "svgY": 295,
+    "zone": "ZONE_GATE_A",
+    "accessible": true,
+    "keywords": [
+      "first aid",
+      "medical",
+      "doctor",
+      "nurse",
+      "emergency",
+      "hurt",
+      "injured",
+      "sick",
+      "ambulance",
+      "health"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 80,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "MERCH_MAIN",
+    "type": "merchandise",
+    "name": "Official FIFA Merchandise Store",
+    "floor": 1,
+    "svgX": 490,
+    "svgY": 135,
+    "zone": "ZONE_CONC_NE",
+    "accessible": true,
+    "keywords": [
+      "merchandise",
+      "shop",
+      "store",
+      "souvenir",
+      "jersey",
+      "kit",
+      "buy",
+      "gift",
+      "fan shop",
+      "official store"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_NE",
+        "baseWeight": 25,
+        "type": "walk",
+        "isCovered": true
+      }
+    ],
+    "spawnPoints": [
+      "mascot"
+    ]
+  },
+  {
+    "nodeId": "TEAM_ENTRY",
+    "type": "team_entry",
+    "name": "Team & VIP Entry",
+    "floor": 1,
+    "svgX": 600,
+    "svgY": 450,
+    "zone": "ZONE_CONC_SE",
+    "accessible": true,
+    "keywords": [
+      "team entry",
+      "vip",
+      "player entrance",
+      "vip access",
+      "accreditation"
+    ],
+    "edges": [
+      {
+        "to": "CONC_MAIN_SE",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "CONC_UPPER_NE",
+    "type": "concourse",
+    "name": "Upper Concourse — Northeast",
+    "floor": 2,
+    "svgX": 520,
+    "svgY": 200,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "upper concourse northeast",
+      "level 2 northeast",
+      "upper deck ne"
+    ],
+    "edges": [
+      {
+        "to": "RAMP_NE",
+        "baseWeight": 35,
+        "type": "ramp",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_UPPER_NW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_SE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "SEC_320",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "CONC_UPPER_NW",
+    "type": "concourse",
+    "name": "Upper Concourse — Northwest",
+    "floor": 2,
+    "svgX": 280,
+    "svgY": 200,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "upper concourse northwest",
+      "level 2 northwest",
+      "upper deck nw"
+    ],
+    "edges": [
+      {
+        "to": "ELEV_W",
+        "baseWeight": 30,
+        "type": "elevator",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_NE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_SW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "CONC_UPPER_SW",
+    "type": "concourse",
+    "name": "Upper Concourse — Southwest",
+    "floor": 2,
+    "svgX": 280,
+    "svgY": 390,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "upper concourse southwest",
+      "level 2 southwest",
+      "upper deck sw"
+    ],
+    "edges": [
+      {
+        "to": "RAMP_SW",
+        "baseWeight": 35,
+        "type": "ramp",
+        "isCovered": false
+      },
+      {
+        "to": "CONC_UPPER_NW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_SE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      }
+    ]
+  },
+  {
+    "nodeId": "CONC_UPPER_SE",
+    "type": "concourse",
+    "name": "Upper Concourse — Southeast",
+    "floor": 2,
+    "svgX": 520,
+    "svgY": 390,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "upper concourse southeast",
+      "level 2 southeast",
+      "upper deck se"
+    ],
+    "edges": [
+      {
+        "to": "ELEV_E",
+        "baseWeight": 30,
+        "type": "elevator",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_NE",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "CONC_UPPER_SW",
+        "baseWeight": 120,
+        "type": "walk",
+        "isCovered": true
+      },
+      {
+        "to": "SEC_214",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "SEC_114",
+    "type": "section",
+    "name": "Section 114 — Lower Bowl South",
+    "floor": 1,
+    "svgX": 440,
+    "svgY": 430,
+    "zone": "ZONE_GATE_D",
+    "accessible": true,
+    "keywords": [
+      "section 114",
+      "114",
+      "lower bowl south",
+      "south stands"
+    ],
+    "edges": [
+      {
+        "to": "GATE_D",
+        "baseWeight": 45,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "SEC_120",
+    "type": "section",
+    "name": "Section 120 — Lower Bowl East",
+    "floor": 1,
+    "svgX": 592,
+    "svgY": 340,
+    "zone": "ZONE_GATE_A",
+    "accessible": true,
+    "keywords": [
+      "section 120",
+      "120",
+      "lower bowl east",
+      "east stands"
+    ],
+    "edges": [
+      {
+        "to": "GATE_A",
+        "baseWeight": 45,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "SEC_214",
+    "type": "section",
+    "name": "Section 214 — Upper Bowl South",
+    "floor": 2,
+    "svgX": 460,
+    "svgY": 395,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "section 214",
+      "214",
+      "upper bowl south",
+      "upper south"
+    ],
+    "edges": [
+      {
+        "to": "CONC_UPPER_SE",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  },
+  {
+    "nodeId": "SEC_320",
+    "type": "section",
+    "name": "Section 320 — Club Level East",
+    "floor": 2,
+    "svgX": 515,
+    "svgY": 210,
+    "zone": "ZONE_UPPER",
+    "accessible": true,
+    "keywords": [
+      "section 320",
+      "320",
+      "club level",
+      "club level east"
+    ],
+    "edges": [
+      {
+        "to": "CONC_UPPER_NE",
+        "baseWeight": 30,
+        "type": "walk",
+        "isCovered": false
+      }
+    ]
+  }
+]

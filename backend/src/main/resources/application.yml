@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: stadium-mate
+
+# ─── Server ──────────────────────────────────────────────────────────────────
+server:
+  port: ${PORT:8080}
+  compression:
+    enabled: true
+    mime-types: application/json,text/plain
+
+# ─── Actuator (Cloud Run health checks) ──────────────────────────────────────
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+# ─── StadiumMate Configuration ───────────────────────────────────────────────
+stadiummate:
+
+  # Gemini REST API settings
+  gemini:
+    # Set GEMINI_API_KEY env var — get a key at https://aistudio.google.com/
+    api-key: ${GEMINI_API_KEY:}
+    model: gemini-2.0-flash
+    base-url: https://generativelanguage.googleapis.com/v1beta
+
+  # Firebase / GCP project
+  firebase:
+    # Set GCP_PROJECT_ID env var — your GCP project that has Firestore enabled
+    project-id: ${GCP_PROJECT_ID:stadium-mate-demo}
+    # Optional: path to service account JSON for local dev.
+    # When deployed to Cloud Run, leave empty — it uses ADC automatically.
+    credentials-file: ${GOOGLE_APPLICATION_CREDENTIALS:}
+
+  # Graph data source: firestore | local
+  # Use "local" during development to skip Firestore and load from classpath JSON.
+  graph:
+    source: ${GRAPH_SOURCE:local}
+
+# ─── Logging ─────────────────────────────────────────────────────────────────
+logging:
+  level:
+    com.stadiummate: DEBUG
+    org.springframework.web: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

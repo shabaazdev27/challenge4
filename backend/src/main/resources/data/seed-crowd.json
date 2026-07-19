@@ -1,0 +1,47 @@
+{
+  "ZONE_GATE_A": {
+    "label": "Gate A Area (East)",
+    "congestionLevel": 0.2,
+    "description": "Main east entrance and surrounding area"
+  },
+  "ZONE_GATE_B": {
+    "label": "Gate B Area (North)",
+    "congestionLevel": 0.3,
+    "description": "North entrance with food courts and accessible restroom"
+  },
+  "ZONE_GATE_C": {
+    "label": "Gate C Area (West)",
+    "congestionLevel": 0.1,
+    "description": "West entrance — food, restroom, open concourse"
+  },
+  "ZONE_GATE_D": {
+    "label": "Gate D Area (South)",
+    "congestionLevel": 0.25,
+    "description": "South entrance with accessible restroom and sections"
+  },
+  "ZONE_CONC_NE": {
+    "label": "Northeast Concourse",
+    "congestionLevel": 0.15,
+    "description": "NE walkway connecting Gates A and B; merchandise store"
+  },
+  "ZONE_CONC_NW": {
+    "label": "Northwest Concourse",
+    "congestionLevel": 0.1,
+    "description": "NW walkway connecting Gates B and C; west elevator hub"
+  },
+  "ZONE_CONC_SW": {
+    "label": "Southwest Concourse",
+    "congestionLevel": 0.1,
+    "description": "SW walkway connecting Gates C and D; SW ramp access"
+  },
+  "ZONE_CONC_SE": {
+    "label": "Southeast Concourse",
+    "congestionLevel": 0.2,
+    "description": "SE walkway connecting Gates D and A; VIP/Team entry"
+  },
+  "ZONE_UPPER": {
+    "label": "Upper Concourse (Level 2)",
+    "congestionLevel": 0.15,
+    "description": "Level 2 concourse ring — sections 214, 320 and upper amenities"
+  }
+}
