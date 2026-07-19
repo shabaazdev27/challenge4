@@ -27,8 +27,8 @@ public class CorsConfig {
         if (allowedOrigins != null && !allowedOrigins.isBlank()) {
             config.setAllowedOrigins(List.of(allowedOrigins.split(",")));
         } else {
-            // Default: allow all (fine for hackathon / demo)
-            config.addAllowedOriginPattern("*");
+            // Default: allow local development origins only
+            config.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:3000"));
         }
 
         config.setAllowedMethods(List.of("GET", "POST", "OPTIONS"));

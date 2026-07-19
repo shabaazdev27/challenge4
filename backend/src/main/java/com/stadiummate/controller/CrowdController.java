@@ -1,6 +1,8 @@
 package com.stadiummate.controller;
 
+import com.stadiummate.model.CrowdSimulateRequest;
 import com.stadiummate.service.CrowdService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -61,21 +63,9 @@ public class CrowdController {
      * @return acknowledgement message
      */
     @PostMapping("/simulate")
-    public ResponseEntity<String> simulate(@RequestBody Map<String, Object> body) {
-        String zoneId = (String) body.get("zoneId");
-        Object levelObj = body.get("level");
-
-        if (zoneId == null || levelObj == null) {
-            return ResponseEntity.badRequest()
-                    .body("Required fields: zoneId (string), level (number 0.0-1.0)");
-        }
-
-        double level;
-        try {
-            level = ((Number) levelObj).doubleValue();
-        } catch (ClassCastException e) {
-            return ResponseEntity.badRequest().body("'level' must be a number");
-        }
+    public ResponseEntity<String> simulate(@Valid @RequestBody CrowdSimulateRequest req) {
+        String zoneId = req.getZoneId();
+        double level = req.getLevel();
 
         crowdService.setManualCongestion(zoneId, level);
         log.info("Crowd simulation: {} = {}", zoneId, level);

@@ -1,6 +1,8 @@
 package com.stadiummate.controller;
 
+import com.stadiummate.model.GameCollectRequest;
 import com.stadiummate.service.GamificationService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +14,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/game")
-@CrossOrigin(origins = "*")
 public class GameController {
 
     private final GamificationService gamificationService;
@@ -27,14 +28,10 @@ public class GameController {
     }
 
     @PostMapping("/collect")
-    public ResponseEntity<Map<String, String>> collectItem(@RequestBody Map<String, String> payload) {
-        String userId = payload.getOrDefault("userId", "anonymous");
-        String nodeId = payload.get("nodeId");
-        String itemType = payload.get("itemType");
-
-        if (nodeId == null || itemType == null) {
-            return ResponseEntity.badRequest().body(Map.of("error", "Missing nodeId or itemType"));
-        }
+    public ResponseEntity<Map<String, String>> collectItem(@Valid @RequestBody GameCollectRequest req) {
+        String userId = req.getUserId() != null && !req.getUserId().isBlank() ? req.getUserId() : "anonymous";
+        String nodeId = req.getNodeId();
+        String itemType = req.getItemType();
 
         String message = gamificationService.collectItem(userId, nodeId, itemType);
         return ResponseEntity.ok(Map.of(

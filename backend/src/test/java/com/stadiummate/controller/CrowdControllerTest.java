@@ -53,6 +53,32 @@ public class CrowdControllerTest {
         
         verify(crowdService).setManualCongestion("ZONE_A", 0.9);
     }
+
+    @Test
+    public void testSimulateLowWarning() throws Exception {
+        mockMvc.perform(post("/api/crowd/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"zoneId\": \"ZONE_A\", \"level\": 0.3}"))
+                .andExpect(status().isOk());
+        
+        verify(crowdService).setManualCongestion("ZONE_A", 0.3);
+    }
+
+    @Test
+    public void testSimulateInvalidZone() throws Exception {
+        mockMvc.perform(post("/api/crowd/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"zoneId\": \"\", \"level\": 0.5}"))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testSimulateInvalidLevel() throws Exception {
+        mockMvc.perform(post("/api/crowd/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"zoneId\": \"ZONE_A\", \"level\": 1.5}"))
+                .andExpect(status().isBadRequest());
+    }
     
     /**
      * Test resetting crowd.

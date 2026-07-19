@@ -1,60 +1,85 @@
 package com.stadiummate.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.QuerySnapshot;
+import com.stadiummate.model.StadiumNode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Unit tests for GraphService.
- */
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 public class GraphServiceTest {
 
-    private GraphService graphService;
+    private Firestore firestore;
+    private ObjectMapper mapper;
 
     @BeforeEach
     public void setup() {
-        Firestore firestore = Mockito.mock(Firestore.class);
-        ObjectMapper mapper = new ObjectMapper();
-        
-        // Initialize GraphService using the local JSON file.
-        graphService = new GraphService(firestore, mapper, "local");
-        graphService.loadGraph();
+        firestore = mock(Firestore.class);
+        mapper = new ObjectMapper();
     }
 
-    /**
-     * Test getting the full graph.
-     */
     @Test
-    public void testGetGraph() {
-        assertNotNull(graphService.getGraph());
+    public void testLoadGraphLocal() {
+        GraphService service = new GraphService(firestore, mapper, "local");
+        service.loadGraph();
+
+        assertNotNull(service.getGraph());
+        assertNotNull(service.getNode("GATE_A"));
+        assertFalse(service.getAllNodeIds().isEmpty());
+        assertFalse(service.findByType("restroom", false).isEmpty());
     }
 
-    /**
-     * Test fetching a node that should exist.
-     */
     @Test
-    public void testGetNode() {
-        assertNotNull(graphService.getNode("GATE_A"));
+    @SuppressWarnings("unchecked")
+    public void testLoadGraphFirestoreSuccess() throws Exception {
+        CollectionReference collectionRef = mock(CollectionReference.class);
+        ApiFuture<QuerySnapshot> future = mock(ApiFuture.class);
+        QuerySnapshot snapshot = mock(QuerySnapshot.class);
+        QueryDocumentSnapshot doc = mock(QueryDocumentSnapshot.class);
+
+        when(firestore.collection("stadium_graph")).thenReturn(collectionRef);
+        when(collectionRef.get()).thenReturn(future);
+        when(future.get()).thenReturn(snapshot);
+        when(snapshot.getDocuments()).thenReturn(List.of(doc));
+
+        Map<String, Object> mockData = Map.of(
+            "nodeId", "MOCK_NODE",
+            "type", "gate",
+            "name", "Mock Gate",
+            "accessible", true,
+            "zone", "ZONE_MOCK",
+            "svgX", 10.0,
+            "svgY", 20.0
+        );
+        when(doc.getData()).thenReturn(mockData);
+
+        GraphService service = new GraphService(firestore, mapper, "firestore");
+        service.loadGraph();
+
+        assertNotNull(service.getGraph());
+        assertEquals("Mock Gate", service.getNode("MOCK_NODE").getName());
     }
-    
-    /**
-     * Test retrieving nodes by type.
-     */
+
     @Test
-    public void testFindByType() {
-        assertNotNull(graphService.findByType("restroom", false));
-    }
-    
-    /**
-     * Test retrieving all node ids.
-     */
-    @Test
-    public void testGetAllNodeIds() {
-        assertNotNull(graphService.getAllNodeIds());
+    @SuppressWarnings("unchecked")
+    public void testLoadGraphFirestoreExceptionFallback() throws Exception {
+        CollectionReference collectionRef = mock(CollectionReference.class);
+        when(firestore.collection("stadium_graph")).thenReturn(collectionRef);
+        when(collectionRef.get()).thenThrow(new RuntimeException("Firestore not initialized"));
+
+        GraphService service = new GraphService(firestore, mapper, "firestore");
+        // Should catch the exception and fallback to local JSON load
+        assertDoesNotThrow(() -> service.loadGraph());
+        assertNotNull(service.getNode("GATE_A")); // Local node should be loaded
     }
 }

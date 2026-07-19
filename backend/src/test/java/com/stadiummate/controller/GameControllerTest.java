@@ -11,12 +11,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Unit tests for GameController.
- */
 public class GameControllerTest {
 
     private MockMvc mockMvc;
@@ -29,39 +28,43 @@ public class GameControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    /**
-     * Test fetching available items for a node.
-     */
     @Test
     public void testGetItems() throws Exception {
-        when(gamificationService.getAvailableItems("GATE_A")).thenReturn(List.of("scarf"));
-        mockMvc.perform(get("/api/game/items/GATE_A"))
+        when(gamificationService.getAvailableItems("node1")).thenReturn(List.of("scarf", "hat"));
+
+        mockMvc.perform(get("/api/game/items/node1"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.items[0]").value("scarf"));
+                .andExpect(jsonPath("$.items[0]").value("scarf"))
+                .andExpect(jsonPath("$.items[1]").value("hat"));
     }
 
-    /**
-     * Test collecting an item.
-     */
     @Test
     public void testCollectItem() throws Exception {
-        when(gamificationService.collectItem("fan1", "GATE_A", "scarf")).thenReturn("Collected");
-        when(gamificationService.getScore("fan1")).thenReturn(10);
-        
+        when(gamificationService.collectItem("user1", "node1", "scarf")).thenReturn("Success");
+        when(gamificationService.getScore("user1")).thenReturn(10);
+
         mockMvc.perform(post("/api/game/collect")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\": \"fan1\", \"nodeId\": \"GATE_A\", \"itemType\": \"scarf\"}"))
+                .content("{\"userId\": \"user1\", \"nodeId\": \"node1\", \"itemType\": \"scarf\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("success"));
+                .andExpect(jsonPath("$.status").value("success"))
+                .andExpect(jsonPath("$.message").value("Success"))
+                .andExpect(jsonPath("$.newScore").value("10"));
     }
-    
-    /**
-     * Test fetching score.
-     */
+
+    @Test
+    public void testCollectItemInvalid() throws Exception {
+        mockMvc.perform(post("/api/game/collect")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"userId\": \"user1\", \"nodeId\": \"\", \"itemType\": \"scarf\"}"))
+                .andExpect(status().isBadRequest());
+    }
+
     @Test
     public void testGetScore() throws Exception {
-        when(gamificationService.getScore("fan1")).thenReturn(50);
-        mockMvc.perform(get("/api/game/score/fan1"))
+        when(gamificationService.getScore("user1")).thenReturn(50);
+
+        mockMvc.perform(get("/api/game/score/user1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.score").value(50));
     }

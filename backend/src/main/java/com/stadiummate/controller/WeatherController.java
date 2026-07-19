@@ -1,6 +1,8 @@
 package com.stadiummate.controller;
 
+import com.stadiummate.model.WeatherSimulateRequest;
 import com.stadiummate.service.WeatherService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +13,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/weather")
-@CrossOrigin(origins = "*")
 public class WeatherController {
 
     private final WeatherService weatherService;
@@ -26,12 +27,9 @@ public class WeatherController {
     }
 
     @PostMapping("/simulate")
-    public ResponseEntity<Map<String, String>> simulateWeather(@RequestBody Map<String, Boolean> payload) {
-        Boolean isRaining = payload.get("isRaining");
-        if (isRaining != null) {
-            weatherService.setRaining(isRaining);
-            return ResponseEntity.ok(Map.of("status", "success", "message", "Weather updated"));
-        }
-        return ResponseEntity.badRequest().body(Map.of("error", "Missing 'isRaining' flag"));
+    public ResponseEntity<Map<String, String>> simulateWeather(@Valid @RequestBody WeatherSimulateRequest req) {
+        boolean isRaining = req.getIsRaining();
+        weatherService.setRaining(isRaining);
+        return ResponseEntity.ok(Map.of("status", "success", "message", "Weather updated"));
     }
 }

@@ -9,12 +9,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * Unit tests for WeatherController.
- */
 public class WeatherControllerTest {
 
     private MockMvc mockMvc;
@@ -27,28 +26,31 @@ public class WeatherControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
-    /**
-     * Test retrieving weather status.
-     */
     @Test
     public void testGetWeather() throws Exception {
         when(weatherService.isRaining()).thenReturn(true);
+
         mockMvc.perform(get("/api/weather"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isRaining").value(true));
     }
 
-    /**
-     * Test simulating weather conditions.
-     */
     @Test
     public void testSimulateWeather() throws Exception {
         mockMvc.perform(post("/api/weather/simulate")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"isRaining\": false}"))
+                .content("{\"isRaining\": true}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("success"));
-                
-        verify(weatherService).setRaining(false);
+
+        verify(weatherService).setRaining(true);
+    }
+
+    @Test
+    public void testSimulateWeatherInvalid() throws Exception {
+        mockMvc.perform(post("/api/weather/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"isRaining\": null}"))
+                .andExpect(status().isBadRequest());
     }
 }

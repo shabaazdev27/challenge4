@@ -1,4 +1,4 @@
-import { sendChatMessage, fetchCrowdState } from "@/lib/api";
+import { sendChatMessage, fetchCrowdState, simulateCrowd, resetCrowd } from "@/lib/api";
 
 // Mock global fetch
 global.fetch = jest.fn();
@@ -87,5 +87,36 @@ describe("api client", () => {
     mockFetch.mockResolvedValueOnce({ ok: false } as Response);
     const result = await fetchCrowdState();
     expect(result).toEqual({});
+  });
+
+  // ─── simulateCrowd and resetCrowd ────────────────────────────────────────
+
+  test("simulateCrowd returns success text on success", async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      text: async () => "Simulated",
+    } as Response);
+
+    const result = await simulateCrowd("ZONE_GATE_A", 0.85);
+    expect(result).toBe("Simulated");
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("/api/crowd/simulate"),
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ zoneId: "ZONE_GATE_A", level: 0.85 }),
+      })
+    );
+  });
+
+  test("resetCrowd sends POST reset request", async () => {
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+    } as Response);
+
+    await resetCrowd();
+    expect(mockFetch).toHaveBeenCalledWith(
+      expect.stringContaining("/api/crowd/reset"),
+      expect.objectContaining({ method: "POST" })
+    );
   });
 });
